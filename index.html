@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="main.css">
+    <!-- get jquery loaded up, include the rendrer js file -->
+    <script>
+        window.$ = window.jQuery = require('./libs/jquery.min.js');
+        jQuery(document).ready(function($){
+            require('./renderer.js');
+        });
+    </script>
+
+    <title>FunkBuddy-01</title>
+  </head>
+  <body>
+    <div id="portSelector"></div>
+    <div id="logCtrlPnl" state="open" class="ctrlPnl openCtrlPnl">
+        <span class="btn pnlToggle" id="toggleLog">close</span>
+        <span class="btn" id="clearLog">clear</span>
+        <div class="ctrl">
+            <span class="label">Log Limit: </span>
+            <input class="pnlField" type="text" name="logLimit" id="logLimit" autocorrect="off" autocapitalize="off">
+        </div>
+        <span class="ctrlPnlTitle">MIDI Monitor</span>
+    </div>
+    <div id="logContainer">
+        <div id="log"></div>
+    </div>
+  </body>
+</html>

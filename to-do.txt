@@ -1,0 +1,7 @@
+things on the to do list:
+
+    1) get midi in/out working with IAC bus
+    2) validate midi out hot-swap works with a physical port
+    3) extract all of the midi encoding / decoding stuff to a midiMessage class
+       -> possibly publish this on NPM or back to the node-midi project on github
+    4) start figuring out what sysex to send to the FB-01 to do voicing

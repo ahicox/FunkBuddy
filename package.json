@@ -1,0 +1,15 @@
+{
+  "name": "FunkBuddy",
+  "version": "1.0.0",
+  "description": "FB-01 Midi Interloper",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Andrew Hicox <andrew@hicox.com>",
+  "devDependencies": {
+    "electron": "^1.4.1",
+    "electron-rebuild": "^1.3.0",
+    "midi": "^0.9.5"
+  }
+}
