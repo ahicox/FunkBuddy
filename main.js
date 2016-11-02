@@ -228,37 +228,7 @@ function parseMidiMessage(midiMessage){
             break;
         case "1110":
             parsed.msgType      = 'pitch bend';
-
-            /* this would be a more correct way to do it
-               unfortunately it doesn't work
-            var bu = new ArrayBuffer(16);
-            var b1v = new DataView(bu, 2, 7);
-            b1v = midiMessage[2];
-            var b2v = new DataView(bu, 9, 7);
-            b2v = midiMessage[1];
-            var b3v = new DataView(bu);
-            var va = b3v.getInt16(2);
-            */
-
-            /* this is ghetto AF, but it works */
-            var lsb = (midiMessage[1] >>> 0).toString(2);
-            var msb = (midiMessage[2] >>> 0).toString(2);
-
-            // make sure everyone is 7 digits logging
-            while (lsb.length < 7){
-                lsb = "0" + lsb;
-            }
-            while (msb.length < 7){
-                msb = "0" + msb;
-            }
-            var va = msb + lsb;
-
-            // spec says 2000H (hex?) is center of pitch change
-            // figure this out later. for now should be the two vals
-            // binarily concatenated ...
-            console.log("[bend] [byte 1]: " + midiMessage[1] + " (" + lsb + ") [byte 2]: " + midiMessage[2] + " (" + msb + ") [combo]: " + va);
-
-            parsed.bendValue    = parseInt(va, 2);
+            parsed.bendValue    = ((midiMessage[2] << 7) | midiMessage[1]);
             break;
         case "1111":
             // sysex and shit ... the interesting stuff goes here

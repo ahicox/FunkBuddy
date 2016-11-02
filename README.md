@@ -16,9 +16,7 @@ Heck, I might even build some sorta modular infrastructure where
 one could code up sound editors for all sorts of ancient midi 
 hardware and just drop 'em in the same gui. 
 
-I dunno. That's all sorta grandiose, and I *just* figured out
-how to decode pitch bend and I had to resort to ascii string
-concatenation ... sooooo ...
+I dunno. That's all sorta grandiose
 
 I'm workin' on it, y'know?
 maybe it'll happen. Maybe it won't.

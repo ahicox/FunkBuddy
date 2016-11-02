@@ -262,10 +262,8 @@ module.exports = function(args){
                 out.velocity            = rawMidiMessage[1];
                 break;
             case 14:
-                out.messageType         = 'pitch bend';
-
                 /*
-                    LOOSE END
+                    SOME OPINIONATED SHIZNIT FO YO AZZ ...
                     midi pitch bend is the most elegantly implemented kludge I've ever encountered.
                     it amounts to binary concatenation where byte 2 is the MSB (coarse value) and
                     byte 1 is the LSB (fine). Ya take byte two, and *literally* slap byte 1 on the
@@ -274,23 +272,9 @@ module.exports = function(args){
                     sense in the 80's). Thusly, no pitch bend (i.e. 'center') is a value of 8192
                     (decimal). Minimum bend (all the way down) is 0, and max bend (all the way up)
                     is 16383.
-
-                    So here's the loose end. Javascript does not want to deal with a 14 bit unsigned
-                    integer. At least I can't figure out how to do it with typed arrays and buffers
-                    javascript wants everything to be 8, 16 or 32 bits. I toyed with trying to zero
-                    pad a 16 bit integer, but I couldn't get it to work.
-
-                    So, I present unto ye the most inefficient hack of all time.
-                    I'm literally busting out each byte into an ascii string of 1's and 0's
-                    then I'm zero padding them to make sure we have 7 bits each.
-                    then I'm string concatenating them. then I'm converting back into an integer.
-                    snicker all you want, bro. it at least works. w00t!
                 */
-                var lsb = (rawMidiMessage[1] >>> 0).toString(2);
-                var msb = (rawMidiMessage[2] >>> 0).toString(2);
-                while (lsb.length < 7){ lsb = "0" + lsb; }
-                while (msb.length < 7){ msb = "0" + msb; }
-                out.value = parseInt(msb + lsb, 3);
+                out.messageType         = 'pitch bend';
+                out.value               = ((rawMidiMesage[2] << 7) | rawMidiMesage[1]);
                 break;
             case 15:
                 out.messageType         = "sysex";
